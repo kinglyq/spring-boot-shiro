@@ -16,7 +16,9 @@ import java.util.Set;
 @Setter
 @ToString
 @Entity
-@Table(name = "sys_role", uniqueConstraints = {@UniqueConstraint(name = "uni_name", columnNames = "name")})
+@Table(name = "sys_role",
+        uniqueConstraints = {@UniqueConstraint(name = "uni_role_name", columnNames = "name")}
+)
 public class Role {
 
     @Id
@@ -32,8 +34,12 @@ public class Role {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Role role = (Role) o;
         return Objects.equals(id, role.id) && Objects.equals(name, role.name);
     }

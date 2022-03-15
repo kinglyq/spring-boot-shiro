@@ -14,7 +14,7 @@ import java.util.Set;
 @ToString
 @Entity
 @Table(name = "sys_permission",
-        uniqueConstraints = {@UniqueConstraint(name = "uni_name", columnNames = "name")}
+        uniqueConstraints = {@UniqueConstraint(name = "uni_prem_name", columnNames = "name")}
 )
 public class Permission {
 
@@ -31,8 +31,12 @@ public class Permission {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Permission that = (Permission) o;
         return Objects.equals(id, that.id) && Objects.equals(name, that.name);
     }

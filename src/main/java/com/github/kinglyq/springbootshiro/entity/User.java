@@ -20,7 +20,9 @@ import java.util.Set;
 @ToString
 @Entity
 @RequiredArgsConstructor
-@Table(name = "sys_user", uniqueConstraints = {@UniqueConstraint(name = "uni_username", columnNames = "username")})
+@Table(name = "sys_user",
+        uniqueConstraints = {@UniqueConstraint(name = "uni_user_name", columnNames = "username")}
+)
 public class User {
 
     @Id

@@ -8,18 +8,17 @@ import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.springframework.context.annotation.Configuration;
 
-import javax.annotation.Resource;
 import java.util.stream.Collectors;
 
-@Configuration
+/**
+ * @author kinglyq
+ */
 public class RepoRealm extends AuthorizingRealm {
 
     public static final String REALM_NAME = "REPO_REALM";
 
-    @Resource
-    private UserService userService;
+    private final UserService userService;
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
@@ -51,5 +50,7 @@ public class RepoRealm extends AuthorizingRealm {
         return null;
     }
 
-
+    public RepoRealm(UserService userService) {
+        this.userService = userService;
+    }
 }
