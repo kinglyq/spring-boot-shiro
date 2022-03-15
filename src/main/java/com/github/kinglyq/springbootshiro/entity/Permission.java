@@ -9,15 +9,14 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-/**
- * @author kinglyq
- */
 @Getter
 @Setter
 @ToString
 @Entity
-@Table(name = "sys_role", uniqueConstraints = {@UniqueConstraint(name = "uni_name", columnNames = "name")})
-public class Role {
+@Table(name = "sys_permission",
+        uniqueConstraints = {@UniqueConstraint(name = "uni_name", columnNames = "name")}
+)
+public class Permission {
 
     @Id
     @GeneratedValue
@@ -26,7 +25,7 @@ public class Role {
     @Column(nullable = false)
     private String name;
 
-    @ManyToMany(mappedBy = "roles")
+    @ManyToMany(mappedBy = "permissions")
     @ToString.Exclude
     private Set<User> users = new HashSet<>();
 
@@ -34,8 +33,8 @@ public class Role {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Role role = (Role) o;
-        return Objects.equals(id, role.id) && Objects.equals(name, role.name);
+        Permission that = (Permission) o;
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name);
     }
 
     @Override
@@ -43,11 +42,10 @@ public class Role {
         return Objects.hash(id, name);
     }
 
-    public Role(String name) {
+    public Permission(String name) {
         this.name = name;
     }
 
-    public Role() {
-
+    public Permission() {
     }
 }

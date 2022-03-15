@@ -6,11 +6,10 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 
 /**
@@ -21,23 +20,34 @@ import java.util.Objects;
 @ToString
 @Entity
 @RequiredArgsConstructor
+@Table(name = "sys_user", uniqueConstraints = {@UniqueConstraint(name = "uni_username", columnNames = "username")})
 public class User {
 
     @Id
     @GeneratedValue
     private Long id;
 
-    @Column(unique = true)
+    @Column(nullable = false)
     private String username;
 
+    @Column(nullable = false)
     private String password;
 
-   /* @ManyToMany
-    @JoinTable(name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    @ToString.Exclude
-    private Set<Role> roles = new HashSet<>();*/
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "sys_user_permission",
+            foreignKey = @ForeignKey(name = "fk_user_permission"),
+            inverseForeignKey = @ForeignKey(name = "fk_permission_user")
+    )
+    @ToString.Include
+    private Set<Permission> permissions = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "sys_user_role",
+            foreignKey = @ForeignKey(name = "fk_user_role"),
+            inverseForeignKey = @ForeignKey(name = "fk_role_user")
+    )
+    @ToString.Include
+    private Set<Role> roles = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {
