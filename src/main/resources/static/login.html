@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <style>
+        .login-form {
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+
+<fieldset class="login-form">
+    <legend>Login</legend>
+    <form action="/login" method="post" autocomplete="off">
+        <p>
+            <label for="username">
+                <input type="text" name="username" id="username"/>
+            </label>
+        </p>
+        <p>
+            <label for="password">
+                <input type="text" name="password" id="password"/>
+            </label>
+        </p>
+        <button type="submit">sign in</button>
+    </form>
+</fieldset>
+
+</body>
+</html>

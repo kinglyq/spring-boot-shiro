@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import static org.apache.shiro.web.filter.mgt.DefaultFilter.anon;
+
 /**
  * @author kinglyq
  */
@@ -32,9 +34,10 @@ public class ShiroConfig {
     @Bean
     public ShiroFilterChainDefinition shiroFilterChainDefinition() {
         DefaultShiroFilterChainDefinition filterChainDefinition = new DefaultShiroFilterChainDefinition();
-        filterChainDefinition.addPathDefinition("/assets/**", "anon");
-        filterChainDefinition.addPathDefinition("/login", "anon");
-        filterChainDefinition.addPathDefinition("/**", "authc");
+        /*filterChainDefinition.addPathDefinition("/assets/**", anon.name());
+        filterChainDefinition.addPathDefinition("/login.html", anon.name());
+        filterChainDefinition.addPathDefinition("/login", anon.name());*/
+        filterChainDefinition.addPathDefinition("/**", anon.name());
         return filterChainDefinition;
     }
 
